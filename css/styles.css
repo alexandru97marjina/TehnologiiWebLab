@@ -108,10 +108,6 @@ body {
     text-align: center;
     border-top:#fdd700 3px solid;
   }
-  .main{
-      min-height: 410px;
-  }
-  
   
   /*responsive*/
   @media(max-width: 768px){
