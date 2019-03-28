@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Update User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+<div class="container my-5">
+    <h2 class="mb-5">Add Event</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="#" th:action="@{/addEvent}" th:object="${event}" method="post">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="title" class="col-form-label">Title</label>
+                        <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Event title">
+                        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></span>
+                    </div>
+                    </div>
+                    <div class="row">
+                     <div class="form-group col-md-6">
+                        <label for="city" class="col-form-label"></label>
+                        <input type="text" th:field="*{city}" class="form-control" id="city" placeholder="Host City">
+                        <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="text-danger"></span>
+                     </div>
+                    </div>
+                 <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="place" class="col-form-label"></label>
+                        <input type="text" th:field="*{place}" class="form-control" id="place" placeholder="Event place">
+                        <span th:if="${#fields.hasErrors('place')}" th:errors="*{place}" class="text-danger"></span>
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="date" class="col-form-label"></label>
+                        <input type="date" th:field="*{date}" class="form-control" id="date">
+                        <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mt-5">
+                        <input type="submit" class="btn btn-primary" value="Add Event">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
