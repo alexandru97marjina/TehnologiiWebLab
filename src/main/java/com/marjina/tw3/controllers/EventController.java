@@ -1,7 +1,6 @@
 package com.marjina.tw3.controllers;
 
 import com.marjina.tw3.entities.Event;
-import com.marjina.tw3.entities.User;
 import com.marjina.tw3.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
