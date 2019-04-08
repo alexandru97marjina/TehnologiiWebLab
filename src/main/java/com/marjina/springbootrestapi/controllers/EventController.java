@@ -37,8 +37,8 @@ public class EventController {
     public Event addEvent(@RequestBody Event event){
         return eventService.addEvent(event);
     }
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Event> updateEvent(@PathVariable("id")UUID id,@RequestBody Event event){
+    @PutMapping
+    public ResponseEntity<Event> updateEvent(@RequestBody Event event){
         return eventService.editEvent(event)
                 .map(edited-> ResponseEntity.ok().body(edited))
                 .orElse(ResponseEntity.notFound().build());
