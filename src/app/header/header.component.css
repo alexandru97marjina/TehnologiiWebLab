@@ -1,0 +1,26 @@
+.navbar{
+    background: #141414;
+    border-bottom:#fdd700 3px solid;
+}
+
+.navbar a{
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+.highlight, .current a{
+    color:#fdd700;
+    font-weight: bold;
+}
+.navbar .fas{
+    color: rgb(93, 30, 241);
+}
+.navbar a:hover{
+    color: #49f116;
+    font-weight: bold;
+}
+
+.up-list{
+    background-color: rgb(22, 0, 73);
+}
