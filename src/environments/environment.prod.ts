@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+
+  serverUrl: 'http://localhost:9000',
+  eventApi: '/events'
 };

@@ -1,0 +1,244 @@
+<div class="container-fluid">
+  <h2 class="text-center">Our Events</h2>
+  <div class="row addEventBtn mb-5">
+    <div class="col-md-6" *ngIf="!addEventBtn">
+      <button class="btn btn-success mb-10 " (click)="addEvent()"><i class="fas fa-plus"></i> Add Event</button>
+    </div>
+  </div>
+  <div class="row justify-content-center p-0 add-container" *ngIf="addEventBtn">
+    <div class="col-md-9 col-lg-9 ml-5 mr-5 ">
+      <div class="container add-container">
+        <div class="row">
+          <form (ngSubmit)="submitAddEvent()" [formGroup]="editEventForm">
+            <div class="row justify-content-center">
+              <div class="col-md-3 field-label-responsive">
+                <label for="title">Title</label>
+              </div>
+              <div class="col-md-9">
+                <div class="form-group">
+                  <div class="align-items-center input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-at"></i></div>
+                    <input type="text" formControlName="title" class="form-control" id="title"
+                           [ngClass]="{ 'is-invalid': submitted && editEventForm.controls.title.errors }"
+                           placeholder="EventName" required autofocus />
+                  </div>
+                  <div class="form-control-feedback">
+                    <div *ngIf="submitted && editEventForm.controls.title.errors" class="text-danger">
+                      <div *ngIf="editEventForm.controls.title.errors?.required">Title is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-md-3 field-label-responsive">
+                <label for="place">Place</label>
+              </div>
+              <div class="col-md-9">
+                <div class="form-group">
+                  <div class="align-items-center input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-at"></i></div>
+                    <input type="text" formControlName="place" class="form-control" id="place"
+                           [ngClass]="{ 'is-invalid': submitted && editEventForm.controls.place.errors }"
+                           placeholder="Place of the event" required autofocus />
+                  </div>
+                  <div class="form-control-feedback">
+                    <div *ngIf="submitted && editEventForm.controls.place.errors" class="text-danger">
+                      <div *ngIf="editEventForm.controls.place.errors?.required">Title is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-md-3 field-label-responsive">
+                <label for="city">City</label>
+              </div>
+              <div class="col-md-9">
+                <div class="form-group">
+                  <div class="align-items-center input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-at"></i></div>
+                    <input type="text" formControlName="city" class="form-control" id="city"
+                           [ngClass]="{ 'is-invalid': submitted && editEventForm.controls.city.errors }"
+                           placeholder="Host City" required autofocus />
+                  </div>
+                  <div class="form-control-feedback">
+                    <div *ngIf="submitted && editEventForm.controls.city.errors" class="text-danger">
+                      <div *ngIf="editEventForm.controls.city.errors?.required">City is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-md-3 field-label-responsive">
+                <label for="date">Date</label>
+              </div>
+              <div class="col-md-9">
+                <div class="form-group">
+                  <div class="align-items-center input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-at"></i></div>
+                    <input type="date" formControlName="date" class="form-control" id="date"
+                           [ngClass]="{ 'is-invalid': submitted && editEventForm.controls.date.errors }"
+                           placeholder="Date of event" required autofocus />
+                  </div>
+                  <div class="form-control-feedback">
+                    <div *ngIf="submitted && editEventForm.controls.date.errors" class="text-danger">
+                      <div *ngIf="editEventForm.controls.date.errors?.required">Date is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <button [disabled]="loading" type="button" (click)="onCancelAdd()"
+                        class="btn btn-danger">Cancel</button>
+              </div>
+              <div class="col-md-3 offset-md-6">
+                <button [disabled]="loading" type="submit" class="btn btn-success">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      <div class="container-fluid mt-5 p-0 text-center">
+        <div class="row justify-content-center p-0">
+          <div class="col-md-10 col-lg-10 ml-5 mr-5">
+            <div class="row card p-0 mt-3 mb-10 btn" *ngFor='let event of events; let i=index;'>
+              <div class="col card-body">
+                <div class="row pres-field">
+                  <div class="col text-left d-flex align-items-center" (click)="openEventPage(i)">
+                    <p class="m-0">{{event.title}}</p>
+                  </div>
+                  <div class="col text-left d-flex align-items-center" (click)="openEventPage(i)">
+                    <p class="m-0">{{event.place}}</p>
+                  </div>
+                  <div class="col text-left d-flex align-items-center" (click)="openEventPage(i)">
+                    <p class="m-0">{{event.city}}</p>
+                  </div>
+                  <div class="col text-left d-flex align-items-center" (click)="openEventPage(i)">
+                    <p class="m-0">{{event.date}}</p>
+                  </div>
+                  <div class="col-lg-3 col-md-12 col-sm-3 col-12 ">
+                    <div class="row" *ngIf="!arrEditEventbtn[i]">
+                      <div class="col-auto d-flex align-items-center">
+                        <button class="btn btn-success " (click)="openEventPage(i)"><i class="fas fa-external-link-alt"></i></button>
+                      </div>
+                      <div class="col-lg-4  col-md-3 col-sm-4 col-5 mr-1">
+                        <button class="btn btn-primary " (click)="editEvent(i)"><i class="fas fa-edit"></i></button>
+                      </div>
+                      <div class="col-lg-4 col-md-3 col-sm-4 col-5">
+                        <button class="btn btn-danger  " (click)="deleteEvent(i)"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container edit-container" *ngIf="arrEditEventbtn[i]">
+                    <div class="row">
+                      <div class="col-md-4 offset-md-4">
+                        <h3 class="text-center">Edit Event</h3>
+                      </div>
+                    </div>
+                    <form [formGroup]="editEventForm" (ngSubmit)="onSubmitEditEvent(i)">
+                      <div class="row justify-content-center">
+                        <div class="col-md-3 field-label-responsive">
+                          <label for="title1">Title</label>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="form-group">
+                            <div class="align-items-center input-group mb-2 mr-sm-2 mb-sm-0">
+                              <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-at"></i></div>
+                              <input type="text" formControlName="title" class="form-control" id="title1"
+                                     [ngClass]="{ 'is-invalid': submitted && editEventForm.controls.title.errors }"
+                                     placeholder="EventName" required autofocus />
+                            </div>
+                            <div class="form-control-feedback">
+                              <div *ngIf="submitted && editEventForm.controls.title.errors" class="text-danger">
+                                <div *ngIf="editEventForm.controls.title.errors?.required">Title is required</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row justify-content-center">
+                        <div class="col-md-3 field-label-responsive">
+                          <label for="place">Place</label>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="form-group">
+                            <div class="align-items-center input-group mb-2 mr-sm-2 mb-sm-0">
+                              <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-at"></i></div>
+                              <input type="text" formControlName="place" class="form-control" id="place1"
+                                     [ngClass]="{ 'is-invalid': submitted && editEventForm.controls.place1.errors }"
+                                     placeholder="Place of the event" required autofocus />
+                            </div>
+                            <div class="form-control-feedback">
+                              <div *ngIf="submitted && editEventForm.controls.place.errors" class="text-danger">
+                                <div *ngIf="editEventForm.controls.place.errors?.required">Title is required</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row justify-content-center">
+                        <div class="col-md-3 field-label-responsive">
+                          <label for="city1">City</label>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="form-group">
+                            <div class="align-items-center input-group mb-2 mr-sm-2 mb-sm-0">
+                              <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-at"></i></div>
+                              <input type="text" formControlName="city" class="form-control" id="city1"
+                                     [ngClass]="{ 'is-invalid': submitted && editEventForm.controls.city.errors }"
+                                     placeholder="Host City" required autofocus />
+                            </div>
+                            <div class="form-control-feedback">
+                              <div *ngIf="submitted && editEventForm.controls.city.errors" class="text-danger">
+                                <div *ngIf="editEventForm.controls.city.errors?.required">City is required</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row justify-content-center">
+                        <div class="col-md-3 field-label-responsive">
+                          <label for="date1">Date</label>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="form-group">
+                            <div class="align-items-center input-group mb-2 mr-sm-2 mb-sm-0">
+                              <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-at"></i></div>
+                              <input type="date" formControlName="date" class="form-control" id="date1"
+                                     [ngClass]="{ 'is-invalid': submitted && editEventForm.controls.date.errors }"
+                                     placeholder="Date of event" required autofocus />
+                            </div>
+                            <div class="form-control-feedback">
+                              <div *ngIf="submitted && editEventForm.controls.date.errors" class="text-danger">
+                                <div *ngIf="editEventForm.controls.date.errors?.required">Date is required</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <button [disabled]="loading" type="button" (click)="onCancelEdit(i)"
+                                  class="btn btn-danger">Cancel</button>
+                        </div>
+                        <div class="col-md-3 offset-md-6">
+                          <button [disabled]="loading" type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
